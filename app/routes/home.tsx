@@ -1,13 +1,185 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Your Name | Software Engineer" },
+    {
+      name: "description",
+      content: "Portfolio of Your Name, a junior software engineer building with React and TypeScript.",
+    },
   ];
 }
 
+/* ---------- EDIT YOUR CONTENT HERE ---------- */
+
+const profile = {
+  name: "Your Name",
+  first: "Jalal",
+  role: "Software Engineer",
+  intro:
+    "Early in my career and learning fast. I build clean, accessible web apps with React and TypeScript, and I ship things I can show you.",
+  email: "jalaluddin.dc14@gmail.com",
+  github: "https://github.com/Jalal4237",
+  linkedin: "https://www.linkedin.com/in/jalal-uddin-875b83271?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+  photo: "/me.png", // put a photo in /public/me.png (a cut-out PNG looks best)
+};
+
+const stack = ["React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Git", "Docker"];
+
+const steps = [
+  { title: "Understand", text: "I start by asking what problem the app solves and who will use it, before writing any code." },
+  { title: "Build", text: "I work in small steps with clean components, version control, and tests where they help." },
+  { title: "Ship", text: "I deploy early, collect feedback, and keep improving what I've released." },
+];
+
+// Replace these with real quotes from teachers, teammates, or clients. Delete the section if you have none yet.
+const quotes = [
+  { text: "Quote from a mentor or teammate about how you work.", name: "Person Name", role: "Their role" },
+  { text: "Another short quote about your reliability or how fast you learn.", name: "Person Name", role: "Their role" },
+];
+
+const projects = [
+  { title: "Learning App", tags: ["Web app", "React"], image: "/projects/learning.jpeg" },
+  { title: "Little Lemon", tags: ["API", "TypeScript"], image: "/projects/little-lemon.jpeg" },
+  { title: "Sentiment Analysis", tags: ["Backend", "PostgreSQL"], image: "/projects/sentiment-analysis.jpeg" },
+  { title: "This Portfolio", tags: ["React Router", "Tailwind"], image: "/projects/portfolio.jpeg" },
+];
+
+/* ---------- PAGE ---------- */
+
+const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark";
+
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div className="min-h-screen">
+      {/* Hero */}
+      <section className="bg-[linear-gradient(to_bottom,#f8f9f6_0%,#d5f58a_40%,#a6e836_60%,#f8f9f6_100%)] pb-16">
+        <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+          <a href="#top" className={`font-serif text-2xl italic ${focus}`}>{profile.name}</a>
+          <nav className="flex gap-6 text-sm font-semibold">
+            <a href="#how" className={`hover:underline ${focus}`}>Process</a>
+            <a href="#works" className={`hover:underline ${focus}`}>Projects</a>
+            <a href="#contact" className={`hover:underline ${focus}`}>Contact</a>
+          </nav>
+        </header>
+
+        <div id="top" className="mx-auto max-w-6xl px-6 pt-10 text-center">
+          <h1 className="text-5xl font-semibold tracking-tight sm:text-7xl">
+            Hi, I'm {profile.first}
+            <span className="block font-serif text-6xl font-normal italic sm:text-8xl">{profile.role}</span>
+          </h1>
+        </div>
+
+        <div className="mx-auto mt-6 grid max-w-6xl items-end gap-8 px-6 md:grid-cols-3">
+          <div className="order-2 md:order-1">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm">
+              <span className="size-2.5 animate-pulse rounded-full bg-emerald" />
+              Available for junior roles
+            </span>
+          </div>
+
+          <div className="order-1 flex justify-center md:order-2">
+            <img
+              src={profile.photo}
+              alt={`Portrait of ${profile.name}`}
+              onError={(e) => (e.currentTarget.style.display = "none")}
+              className="h-80 w-auto object-contain grayscale md:-mt-4 md:h-[26rem]"
+            />
+          </div>
+
+          <div className="order-3 md:pb-6">
+            <p className="max-w-xs leading-relaxed">{profile.intro}</p>
+            <a
+              href="#contact"
+              className={`mt-5 inline-flex rounded-full bg-dark px-6 py-3 font-semibold text-white hover:bg-black ${focus}`}
+            >
+              Get in touch
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Stack strip */}
+      <section aria-label="Technologies" className="mx-auto max-w-6xl px-6 py-10">
+        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-lg font-bold text-dark/50">
+          {stack.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* How I work */}
+      <section id="how" className="mx-auto max-w-6xl px-6 py-16">
+        <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">How I work</h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {steps.map((step, i) => (
+            <article key={step.title} className="rounded-2xl bg-white p-6 shadow-sm">
+              <span className="font-serif text-4xl italic text-dark/40">0{i + 1}</span>
+              <h3 className="mt-8 text-xl font-bold">{step.title}</h3>
+              <p className="mt-2 leading-relaxed text-dark/70">{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Quotes */}
+      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-8 md:grid-cols-2">
+        {quotes.map((q, i) => (
+          <figure key={i} className="border-l-4 border-emerald pl-6">
+            <blockquote className="text-lg leading-relaxed">{q.text}</blockquote>
+            <figcaption className="mt-3 text-sm">
+              <span className="font-bold">{q.name}</span>
+              <span className="text-dark/60">, {q.role}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </section>
+
+      {/* Selected works */}
+      <section id="works" className="mx-auto max-w-6xl px-6 py-16">
+        <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">Selected projects</h2>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {projects.map((p) => (
+            <a key={p.title} href="#" className={`group block rounded-2xl bg-white p-3 shadow-sm ${focus}`}>
+              <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(135deg,#e8f9c4,#a6e836)]">
+                {p.image ? (
+                  <img src={p.image} alt={`${p.title} screenshot`} className="size-full object-cover" />
+                ) : (
+                  <span className="font-serif text-5xl italic text-dark/40">{p.title}</span>
+                )}
+              </div>
+              <div className="flex items-center justify-between px-2 pb-1 pt-4">
+                <h3 className="font-bold group-hover:underline">{p.title}</h3>
+                <ul className="flex gap-2 text-xs font-semibold">
+                  {p.tags.map((t) => (
+                    <li key={t} className="rounded-full bg-[#f8f9f6] px-3 py-1 ring-1 ring-dark/10">{t}</li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="bg-dark py-20 text-white">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-6xl">
+            Let's build something <span className="font-serif font-normal italic text-emerald">together</span>
+          </h2>
+          <a
+            href={`mailto:${profile.email}`}
+            className="mt-8 inline-flex rounded-full bg-emerald px-8 py-4 text-lg font-bold text-dark hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {profile.email}
+          </a>
+          <div className="mt-8 flex justify-center gap-6 font-semibold text-white/80">
+            <a href={profile.github} className="underline hover:text-emerald">GitHub</a>
+            <a href={profile.linkedin} className="underline hover:text-emerald">LinkedIn</a>
+          </div>
+          <p className="mt-12 text-sm text-white/50">© {new Date().getFullYear()} {profile.name}</p>
+        </div>
+      </section>
+    </div>
+  );
 }
